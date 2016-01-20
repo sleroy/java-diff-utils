@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: "sonar-runner"
 
 group = 'fr.echoeslabs.migration.diffutils'
 version = '1.4.1'
@@ -31,5 +32,47 @@ uploadArchives {
 				//				}
 			}
 		}
+	}
+}
+
+def getGitBranch()  {
+	
+	
+	try {
+		def stdout = new ByteArrayOutputStream()
+		exec {
+			executable = "git"
+			args = [
+				'rev-parse',
+				'--abbrev-ref',
+				'HEAD'
+			]
+			standardOutput = stdout
+		}
+		def currentBranch = stdout.toString().trim()
+		
+		return currentBranch
+	} catch(Exception e) {
+		return "local"
+	}
+}
+
+
+sonarRunner {
+	repositories { jcenter() }
+	toolVersion = "2.4"
+	
+	// Fine grained control over the runner process
+	forkOptions { maxHeapSize = '1024m' }
+	sonarProperties {
+		property "sonar.host.url", sonarURL
+		property "sonar.jdbc.url", sonarJDBC
+		property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+		property "sonar.jdbc.username", sonarUser
+		property "sonar.jdbc.password", sonarPassword
+		property "sonar.projectKey", "java-difflib-$version"
+		property "sonar.projectName", "Java Difflib $version"
+		property "sonar.projectVersion", "$version"
+		property "sonar.branch", getGitBranch()
 	}
 }
