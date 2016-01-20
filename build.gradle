@@ -1,0 +1,35 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'fr.echoeslabs.migration.diffutils'
+version = '1.4.1'
+
+description = "java-diff-utils"
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+dependencies {
+	compile 'commons-io:commons-io:2.4'
+	
+	testCompile group: 'junit', name: 'junit', version:'4.12'
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url: "$nexusURL/nexus/content/repositories/migration-framework/") {
+				authentication(userName: mavenUser, password: mavenPassword)
+			}
+			snapshotRepository(url: "$nexusURL/nexus/content/repositories/migration-framework/") {
+				authentication(userName: mavenUser, password: mavenPassword)
+				//				}
+			}
+		}
+	}
+}
