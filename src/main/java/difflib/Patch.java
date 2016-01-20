@@ -21,58 +21,82 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * Describes the patch holding all deltas between the original and revised texts.
- * 
+ * Describes the patch holding all deltas between the original and revised
+ * texts.
+ *
  * @author <a href="dm.naumenko@gmail.com">Dmitry Naumenko</a>
- * @param T The type of the compared elements in the 'lines'.
+ * @param T
+ *            The type of the compared elements in the 'lines'.
  */
 public class Patch<T> {
-    private List<Delta<T>> deltas = new LinkedList<Delta<T>>();
-
-    /**
-     * Apply this patch to the given target
-     * @return the patched text
-     * @throws PatchFailedException if can't apply patch
-     */
-    public List<T> applyTo(List<T> target) throws PatchFailedException {
-        List<T> result = new LinkedList<T>(target);
-        ListIterator<Delta<T>> it = getDeltas().listIterator(deltas.size());
-        while (it.hasPrevious()) {
-            Delta<T> delta = (Delta<T>) it.previous();
-            delta.applyTo(result);
-        }
-        return result;
-    }
-    
-    /**
-     * Restore the text to original. Opposite to applyTo() method.
-     * @param target the given target
-     * @return the restored text
-     */
-    public List<T> restore(List<T> target) {
-        List<T> result = new LinkedList<T>(target);
-        ListIterator<Delta<T>> it = getDeltas().listIterator(deltas.size());
-        while (it.hasPrevious()) {
-            Delta<T> delta = (Delta<T>) it.previous();
-            delta.restore(result);
-        }
-        return result;
-    }
-    
-    /**
-     * Add the given delta to this patch
-     * @param delta the given delta
-     */
-    public void addDelta(Delta<T> delta) {
-        deltas.add(delta);
-    }
-
-    /**
-     * Get the list of computed deltas
-     * @return the deltas
-     */
-    public List<Delta<T>> getDeltas() {
-        Collections.sort(deltas, DeltaComparator.INSTANCE);
-        return deltas;
-    }
+	
+	private final List<Delta<T>> deltas = new LinkedList<Delta<T>>();
+	
+	/**
+	 * Add the given delta to this patch
+	 * 
+	 * @param delta
+	 *            the given delta
+	 */
+	public void addDelta(Delta<T> delta) {
+		
+		this.deltas.add(delta);
+	}
+	
+	/**
+	 * Apply this patch to the given target
+	 * 
+	 * @return the patched text
+	 * @throws PatchFailedException
+	 *             if can't apply patch
+	 */
+	public List<T> applyTo(List<T> target) throws PatchFailedException {
+		
+		final List<T> result = new LinkedList<T>(target);
+		final ListIterator<Delta<T>> it = getDeltas().listIterator(this.deltas.size());
+		while (it.hasPrevious()) {
+			final Delta<T> delta = it.previous();
+			delta.applyTo(result);
+		}
+		return result;
+	}
+	
+	/**
+	 * Get the list of computed deltas
+	 * 
+	 * @return the deltas
+	 */
+	public List<Delta<T>> getDeltas() {
+		
+		Collections.sort(this.deltas, DeltaComparator.INSTANCE);
+		return this.deltas;
+	}
+	
+	/**
+	 * Restore the text to original. Opposite to applyTo() method.
+	 * 
+	 * @param target
+	 *            the given target
+	 * @return the restored text
+	 */
+	public List<T> restore(List<T> target) {
+		
+		final List<T> result = new LinkedList<T>(target);
+		final ListIterator<Delta<T>> it = getDeltas().listIterator(this.deltas.size());
+		while (it.hasPrevious()) {
+			final Delta<T> delta = it.previous();
+			delta.restore(result);
+		}
+		return result;
+	}
+	
+	@Override
+	public String toString() {
+		
+		final StringBuilder sb = new StringBuilder();
+		for (final Delta delta : this.deltas) {
+			sb.append(delta).append("\n");
+		}
+		return sb.toString();
+	}
 }
