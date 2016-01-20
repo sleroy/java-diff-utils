@@ -15,13 +15,18 @@
  */
 package difflib;
 
-import difflib.myers.Equalizer;
-import difflib.myers.MyersDiff;
-
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.io.IOUtils;
+
+import difflib.myers.Equalizer;
+import difflib.myers.MyersDiff;
 
 /**
  * Implements the difference and patching engine
@@ -33,6 +38,7 @@ import java.util.regex.Pattern;
  */
 public class DiffUtils {
 
+	private static final String EOL = "\\r?\\n";
 	private static Pattern unifiedDiffChunkRe = Pattern
 			.compile("^@@\\s+-(?:(\\d+)(?:,(\\d+))?)\\s+\\+(?:(\\d+)(?:,(\\d+))?)\\s+@@$");
 
@@ -49,6 +55,42 @@ public class DiffUtils {
 	 */
 	public static <T> Patch<T> diff(List<T> original, List<T> revised) {
 		return DiffUtils.diff(original, revised, new MyersDiff<T>());
+	}
+	
+	/**
+	 * Diff between two strings
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param _str
+	 *            the _str
+	 * @param _revised
+	 *            the _revised
+	 * @return the patch
+	 */
+	public static Patch<String> diff(String _str, String _revised) {
+		 String originLines[] = _str.split(EOL);
+		 String revisedLines[] = _revised.split(EOL); //$NON-NLS-1$
+		 
+		return DiffUtils.diff(Arrays.asList(originLines), Arrays.asList(revisedLines));
+	}
+	
+
+	/**
+	 * Diff between two files
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param _str
+	 *            the first file
+	 * @param _revised
+	 *            the revised file
+	 * @return the patch
+	 * @throws IOException 
+	 */
+	public static Patch<String> diff(File _str, File _revised) throws IOException {
+		 
+		return DiffUtils.diff(IOUtils.toString(_str.toURI()), IOUtils.toString(_revised.toURI()));
 	}
 
 	/**
