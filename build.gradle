@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: "sonar-runner"
+apply plugin: 'jacoco'
 
 group = 'fr.echoeslabs.migration.diffutils'
 version = '1.4.1'
@@ -36,6 +37,7 @@ if (!"master".equals(getGitBranch())) {
 	version="$version." + getGitBranch()
 }
 
+jacoco { toolVersion = '0.7.1.201405082137' }
 
 repositories {
 	mavenCentral()
@@ -79,3 +81,14 @@ sonarRunner {
 		property "sonar.branch", getGitBranch()
 	}
 }
+
+
+jacocoTestReport {
+	reports {
+		html.enabled = true
+		xml.enabled = true
+		csv.enabled = false
+	}
+}
+
+
