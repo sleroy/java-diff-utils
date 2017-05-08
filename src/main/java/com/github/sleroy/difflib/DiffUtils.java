@@ -32,31 +32,29 @@ import org.apache.commons.io.IOUtils;
 import com.github.sleroy.difflib.myers.Equalizer;
 import com.github.sleroy.difflib.myers.MyersDiff;
 
+// TODO: Auto-generated Javadoc
 /**
- * Implements the difference and patching engine
- * 
+ * Implements the difference and patching engine.
+ *
  * @author <a href="dm.naumenko@gmail.com">Dmitry Naumenko</a>
  * @version 0.4.1
- * @param T
- *            The type of the compared elements in the 'lines'.
  */
 public class DiffUtils {
 
+    /** The Constant EOL. */
     private static final String	EOL		   = "\\r?\\n";
+    
+    /** The unified diff chunk re. */
     private static Pattern	unifiedDiffChunkRe = Pattern
             .compile("^@@\\s+-(?:(\\d+)(?:,(\\d+))?)\\s+\\+(?:(\\d+)(?:,(\\d+))?)\\s+@@$");
 
     /**
-     * Diff between two files
+     * Diff between two files.
      *
-     * @param <T>
-     *            the generic type
-     * @param _str
-     *            the first file
-     * @param _revised
-     *            the revised file
+     * @param _str            the first file
+     * @param _revised            the revised file
      * @return the patch
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     public static Patch<String> diff(File _str, File _revised) throws IOException {
 
@@ -66,12 +64,11 @@ public class DiffUtils {
 
     /**
      * Computes the difference between the original and revised list of elements
-     * with default diff algorithm
-     * 
-     * @param original
-     *            The original text. Must not be {@code null}.
-     * @param revised
-     *            The revised text. Must not be {@code null}.
+     * with default diff algorithm.
+     *
+     * @param <T> the generic type
+     * @param original            The original text. Must not be {@code null}.
+     * @param revised            The revised text. Must not be {@code null}.
      * @return The patch describing the difference between the original and
      *         revised sequences. Never {@code null}.
      */
@@ -81,14 +78,12 @@ public class DiffUtils {
 
     /**
      * Computes the difference between the original and revised list of elements
-     * with default diff algorithm
-     * 
-     * @param original
-     *            The original text. Must not be {@code null}.
-     * @param revised
-     *            The revised text. Must not be {@code null}.
-     * @param algorithm
-     *            The diff algorithm. Must not be {@code null}.
+     * with default diff algorithm.
+     *
+     * @param <T> the generic type
+     * @param original            The original text. Must not be {@code null}.
+     * @param revised            The revised text. Must not be {@code null}.
+     * @param algorithm            The diff algorithm. Must not be {@code null}.
      * @return The patch describing the difference between the original and
      *         revised sequences. Never {@code null}.
      */
@@ -107,15 +102,12 @@ public class DiffUtils {
 
     /**
      * Computes the difference between the original and revised list of elements
-     * with default diff algorithm
-     * 
-     * @param original
-     *            The original text. Must not be {@code null}.
-     * @param revised
-     *            The revised text. Must not be {@code null}.
-     * 
-     * @param equalizer
-     *            the equalizer object to replace the default compare algorithm
+     * with default diff algorithm.
+     *
+     * @param <T> the generic type
+     * @param original            The original text. Must not be {@code null}.
+     * @param revised            The revised text. Must not be {@code null}.
+     * @param equalizer            the equalizer object to replace the default compare algorithm
      *            (Object.equals). If {@code null} the default equalizer of the
      *            default algorithm is used..
      * @return The patch describing the difference between the original and
@@ -129,14 +121,10 @@ public class DiffUtils {
     }
 
     /**
-     * Diff between two strings
+     * Diff between two strings.
      *
-     * @param <T>
-     *            the generic type
-     * @param _str
-     *            the _str
-     * @param _revised
-     *            the _revised
+     * @param _str            the _str
+     * @param _revised            the _revised
      * @return the patch
      */
     public static Patch<String> diff(String _str, String _revised) {
@@ -149,21 +137,16 @@ public class DiffUtils {
     /**
      * generateUnifiedDiff takes a Patch and some other arguments, returning the
      * Unified Diff format text representing the Patch.
-     * 
-     * @param original
-     *            - Filename of the original (unrevised file)
-     * @param revised
-     *            - Filename of the revised file
-     * @param originalLines
-     *            - Lines of the original file
-     * @param patch
-     *            - Patch created by the diff() function
-     * @param contextSize
-     *            - number of lines of context output around each difference in
+     *
+     * @author Bill James (tankerbay@gmail.com)
+     * @param original            - Filename of the original (unrevised file)
+     * @param revised            - Filename of the revised file
+     * @param originalLines            - Lines of the original file
+     * @param patch            - Patch created by the diff() function
+     * @param contextSize            - number of lines of context output around each difference in
      *            the file.
      * @return List of strings representing the Unified Diff representation of
      *         the Patch argument.
-     * @author Bill James (tankerbay@gmail.com)
      */
     public static List<String> generateUnifiedDiff(String original, String revised, List<String> originalLines,
             Patch<String> patch, int contextSize) {
@@ -222,12 +205,11 @@ public class DiffUtils {
 
     /**
      * getDeltaText returns the lines to be added to the Unified Diff text from
-     * the Delta parameter
-     * 
-     * @param delta
-     *            - the Delta to output
-     * @return list of String lines of code.
+     * the Delta parameter.
+     *
      * @author Bill James (tankerbay@gmail.com)
+     * @param delta            - the Delta to output
+     * @return list of String lines of code.
      */
     private static List<String> getDeltaText(Delta<String> delta) {
 	List<String> buffer = new ArrayList<String>();
@@ -333,15 +315,13 @@ public class DiffUtils {
     }
 
     /**
-     * Patch the original text with given patch
-     * 
-     * @param original
-     *            the original text
-     * @param patch
-     *            the given patch
+     * Patch the original text with given patch.
+     *
+     * @param <T> the generic type
+     * @param original            the original text
+     * @param patch            the given patch
      * @return the revised text
-     * @throws PatchFailedException
-     *             if can't apply patch
+     * @throws PatchFailedException             if can't apply patch
      */
     public static <T> List<T> patch(List<T> original, Patch<T> patch) throws PatchFailedException {
 	return patch.applyTo(original);
@@ -350,15 +330,12 @@ public class DiffUtils {
     /**
      * processDeltas takes a list of Deltas and outputs them together in a
      * single block of Unified-Diff-format text.
-     * 
-     * @param origLines
-     *            - the lines of the original file
-     * @param deltas
-     *            - the Deltas to be output as a single block
-     * @param contextSize
-     *            - the number of lines of context to place around block
-     * @return
+     *
      * @author Bill James (tankerbay@gmail.com)
+     * @param origLines            - the lines of the original file
+     * @param deltas            - the Deltas to be output as a single block
+     * @param contextSize            - the number of lines of context to place around block
+     * @return the list
      */
     private static List<String> processDeltas(List<String> origLines, List<Delta<String>> deltas, int contextSize) {
 	List<String> buffer = new ArrayList<String>();
@@ -440,12 +417,11 @@ public class DiffUtils {
     }
 
     /**
-     * Unpatch the revised text for a given patch
-     * 
-     * @param revised
-     *            the revised text
-     * @param patch
-     *            the given patch
+     * Unpatch the revised text for a given patch.
+     *
+     * @param <T> the generic type
+     * @param revised            the revised text
+     * @param patch            the given patch
      * @return the original text
      */
     public static <T> List<T> unpatch(List<T> revised, Patch<T> patch) {

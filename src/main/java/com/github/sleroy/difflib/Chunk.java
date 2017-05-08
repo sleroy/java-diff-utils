@@ -32,7 +32,7 @@ import java.util.List;
  * differencing using this library.
  * </p>
  * 
- * @author <a href="dm.naumenko@gmail.com>Dmitry Naumenko</a>
+ * @author <a href="dm.naumenko@gmail.com">Dmitry Naumenko</a>
  * @param T
  *            The type of the compared elements in the 'lines'.
  */

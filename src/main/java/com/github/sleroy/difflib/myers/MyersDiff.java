@@ -26,11 +26,12 @@ import java.util.List;
 
 import com.github.sleroy.difflib.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * A clean-room implementation of
  * <a href="http://www.cs.arizona.edu/people/gene/"> Eugene Myers</a>
  * differencing algorithm.
- *
+ * 
  * <p>
  * See the paper at
  * <a href="http://www.cs.arizona.edu/people/gene/PAPERS/diff.ps">
@@ -38,13 +39,18 @@ import com.github.sleroy.difflib.*;
  * </p>
  *
  * @author <a href="mailto:juanco@suigeneris.org">Juanco Anez</a>
- * @param T
- *            The type of the compared elements in the 'lines'.
+ * @param <T> the generic type
  */
 public class MyersDiff<T> implements DiffAlgorithm<T> {
 
     /**
      * Copied here from JDK 1.6
+     *
+     * @param <T> the generic type
+     * @param original the original
+     * @param from the from
+     * @param to the to
+     * @return the t[]
      */
     @SuppressWarnings("unchecked")
     public static <T> T[] copyOfRange2(T[] original, int from, int to) {
@@ -53,6 +59,14 @@ public class MyersDiff<T> implements DiffAlgorithm<T> {
 
     /**
      * Copied here from JDK 1.6
+     *
+     * @param <T> the generic type
+     * @param <U> the generic type
+     * @param original the original
+     * @param from the from
+     * @param to the to
+     * @param newType the new type
+     * @return the t[]
      */
     @SuppressWarnings("unchecked")
     public static <T, U> T[] copyOfRange2(U[] original, int from, int to, Class<? extends T[]> newType) {
@@ -172,15 +186,10 @@ public class MyersDiff<T> implements DiffAlgorithm<T> {
     /**
      * Constructs a {@link Patch} from a difference path.
      *
-     * @param path
-     *            The path.
-     * @param orig
-     *            The original sequence.
-     * @param rev
-     *            The revised sequence.
+     * @param path            The path.
+     * @param orig            The original sequence.
+     * @param rev            The revised sequence.
      * @return A {@link Patch} script corresponding to the path.
-     * @throws DifferentiationFailedException
-     *             if a {@link Patch} could not be built from the given path.
      */
     public Patch<T> buildRevision(PathNode path, List<T> orig, List<T> rev) {
 	if (path == null)
@@ -270,6 +279,13 @@ public class MyersDiff<T> implements DiffAlgorithm<T> {
 	return diff(Arrays.asList(original), Arrays.asList(revised));
     }
 
+    /**
+     * Equals.
+     *
+     * @param orig the orig
+     * @param rev the rev
+     * @return true, if successful
+     */
     private boolean equals(T orig, T rev) {
 	return equalizer.equals(orig, rev);
     }

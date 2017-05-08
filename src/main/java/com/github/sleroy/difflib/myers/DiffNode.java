@@ -18,11 +18,13 @@
  */
 package com.github.sleroy.difflib.myers;
 
+// TODO: Auto-generated Javadoc
 /**
  * <p>Title: </p>
  * <p>Description: </p>
  * <p>Copyright: Copyright (c) 2002</p>
- * <p>Company: </p>
+ * <p>Company: </p>.
+ *
  * @author not attributable
  * @version 1.0
  */
@@ -45,6 +47,7 @@ package com.github.sleroy.difflib.myers;
  *
  */
 public final class DiffNode extends PathNode {
+    
     /**
      * Constructs a DiffNode.
      * <p>
@@ -52,21 +55,16 @@ public final class DiffNode extends PathNode {
      * <code>prev</code> parameter will be followed using
      * {@link PathNode#previousSnake} until a non-diff node is found.
      *
-     * @param the
-     *            position in the original sequence
-     * @param the
-     *            position in the revised sequence
-     * @param prev
-     *            the previous node in the path.
+     * @param i the i
+     * @param j the j
+     * @param prev            the previous node in the path.
      */
     public DiffNode(int i, int j, PathNode prev) {
 	super(i, j, (prev == null ? null : prev.previousSnake()));
     }
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @return false, always
+    /* (non-Javadoc)
+     * @see com.github.sleroy.difflib.myers.PathNode#isSnake()
      */
     public boolean isSnake() {
 	return false;

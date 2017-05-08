@@ -22,17 +22,29 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /**
+ * The Class DeltaComparator builds a comparator.
+ *
  * @author mksenzov
- * @param T
- *            The type of the compared elements in the 'lines'.
  */
 public class DeltaComparator implements Comparator<Delta<?>>, Serializable {
+
+    /** The Constant serialVersionUID. */
     private static final long		     serialVersionUID = 1L;
+
+    /** The Constant INSTANCE. */
     public static final Comparator<Delta<?>> INSTANCE	      = new DeltaComparator();
 
+    /**
+     * Instantiates a new delta comparator.
+     */
     private DeltaComparator() {
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+     */
     public int compare(final Delta<?> a, final Delta<?> b) {
 	final int posA = a.getOriginal().getPosition();
 	final int posB = b.getOriginal().getPosition();

@@ -19,39 +19,35 @@
 
 package com.github.sleroy.difflib.myers;
 
+// TODO: Auto-generated Javadoc
 /**
  * Represents a snake in a diffpath.
  * <p>
- *
+ * 
  * {@link DiffNode DiffNodes} and {@link Snake Snakes} allow for compression of
  * diffpaths, as each snake is represented by a single {@link Snake Snake} node
  * and each contiguous series of insertions and deletions is represented by a
  * single {@link DiffNode DiffNodes}.
  *
+ * @author <a href="mailto:juanco@suigeneris.org">Juanco Anez</a>
  * @version $Revision: 69 $ $Date: 2003-10-13 11:00:44 +0300 (Пнд, 13 Окт 2003)
  *          $
- * @author <a href="mailto:juanco@suigeneris.org">Juanco Anez</a>
- *
  */
 public final class Snake extends PathNode {
+    
     /**
      * Constructs a snake node.
      *
-     * @param the
-     *            position in the original sequence
-     * @param the
-     *            position in the revised sequence
-     * @param prev
-     *            the previous node in the path.
+     * @param i the i
+     * @param j the j
+     * @param prev            the previous node in the path.
      */
     public Snake(int i, int j, PathNode prev) {
 	super(i, j, prev);
     }
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @return true always
+    /* (non-Javadoc)
+     * @see com.github.sleroy.difflib.myers.PathNode#isSnake()
      */
     public boolean isSnake() {
 	return true;

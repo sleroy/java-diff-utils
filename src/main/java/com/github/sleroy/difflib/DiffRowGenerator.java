@@ -71,8 +71,8 @@ public class DiffRowGenerator {
 	 * Set the column with of generated lines of original and revised texts.
 	 * 
 	 * @param width
-	 *            the width to set. Making it < 0 doesn't have any sense.
-	 *            Default 80.
+	 *            the width to set. Making it lesser than 0 doesn't have any sense.
+	 *            Default is 80.
 	 * @return builder with configured ignoreBlankLines parameter
 	 */
 	public Builder columnWidth(int width) {
