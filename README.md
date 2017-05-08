@@ -1,6 +1,14 @@
 # java-diff-utils
 Automatically exported from code.google.com/p/java-diff-utils
 
+[![Build Status](https://travis-ci.org/sleroy/java-diff-utils.svg?branch=master)](https://travis-ci.org/sleroy/java-diff-utils)
+i
+[![Coverage Status](https://coveralls.io/repos/sleroy/java-diff-utils/badge.svg?branch=master&service=github)](https://coveralls.io/github/sleroy/java-diff-utils?branch=master)
+
+[![Javadocs](https://www.javadoc.io/badge/com.github.sleroy/java-diff-utils.svg)](https://www.javadoc.io/doc/com.github.sleroy/java-diff-utils)
+
+
+
 Diff Utils library is an OpenSource library for performing the comparison operations between texts: computing diffs, applying patches, generating unified diffs or parsing them, generating diff output for easy future displaying (like side-by-side view) and so on.
 
 Main reason to build this library was the lack of easy-to-use libraries with all the usual stuff you need while working with diff files. Originally it was inspired by JRCS library and it's nice design of diff module.
