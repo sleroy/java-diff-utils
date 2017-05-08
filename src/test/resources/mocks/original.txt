@@ -16,13 +16,13 @@
     You should have received a copy of the GNU General Public License
     along with Java Diff Utills Library.  If not, see <http://www.gnu.org/licenses/>.
 */
-package difflib;
+package com.github.sleroy.difflib;
 
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import difflib.myers.*;
+import com.github.sleroy.difflib.myers.*;
 
 /**
  * Implements the difference and patching engine

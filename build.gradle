@@ -113,7 +113,7 @@ uploadArchives {
 dependencies {
     compile 'commons-io:commons-io:2.5'
     
-    compileOnly "junit:junit:$JUNIT_VERSION"
+    testCompile "junit:junit:$JUNIT_VERSION"
 }
 
 
